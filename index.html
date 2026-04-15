@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCK158İbanMağdurları</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
+        .container { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); max-width: 480px; width: 100%; text-align: center; }
+        h2 { color: #202124; margin-bottom: 5px; font-size: 20px; }
+        .subtitle { color: #5f6368; font-size: 14px; margin-bottom: 25px; display: block; }
+        .group-card { background: #f8f9fa; border: 1px solid #dadce0; padding: 15px; border-radius: 10px; margin-bottom: 20px; transition: 0.3s; }
+        .group-card:hover { border-color: #d93025; background: #fff; }
+        .group-name { font-weight: bold; display: block; margin-bottom: 12px; color: #3c4043; font-size: 15px; text-transform: uppercase; }
+        .btn-send { background-color: #d93025; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; font-size: 14px; transition: 0.2s; }
+        .btn-send:hover { background-color: #b3261e; }
+        .btn-empty { background-color: #5f6368; opacity: 0.7; }
+        .footer-note { font-size: 12px; color: #70757a; margin-top: 25px; text-align: left; background: #fffbe6; padding: 12px; border-radius: 6px; border: 1px solid #ffe58f; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>TCK158İbanMağdurları</h2>
+    <span class="subtitle">İlgili grubu seçerek mail gönderimini başlatın.</span>
+
+    <div class="group-card">
+        <span class="group-name">AK PARTİ GRUBU</span>
+        <button class="btn-send" onclick="mailGonder(1)">Gmail ile Hazırla ve Gönder</button>
+    </div>
+
+    <div class="group-card">
+        <span class="group-name">İKİNCİ GRUP</span>
+        <button class="btn-send btn-empty" onclick="mailGonder(2)">Grup Henüz Hazır Değil</button>
+    </div>
+
+    <div class="group-card">
+        <span class="group-name">ÜÇÜNCÜ GRUP</span>
+        <button class="btn-send btn-empty" onclick="mailGonder(3)">Grup Henüz Hazır Değil</button>
+    </div>
+
+    <div class="group-card">
+        <span class="group-name">DÖRDÜNCÜ GRUP</span>
+        <button class="btn-send btn-empty" onclick="mailGonder(4)">Grup Henüz Hazır Değil</button>
+    </div>
+
+    <div class="footer-note">
+        <b>Not:</b> Butona tıkladığınızda tüm alıcılar "BCC" (Gizli) kısmına eklenir. Göndermeden önce mesajın en altına adınızı eklemeyi unutmayın.
+    </div>
+</div>
+
+<script>
+    const veriler = {
+        1: {
+            konu: "TCK 158 Maddesinde İşlemlere Yönelik Hukuki İnceleme Talebi",
+            mesaj: "Sayın Adalet ve Kalkınma Partisi Yetkilileri,\n\nBizler, TCK 158 başta olmak üzere IBAN kaynaklı yargılanan; ancak dolandırıcılık kastı olmayan, hesapları başkaları tarafından kullanılan kişileriz. Dosyadaki Müşteki zararlarını tamamen karşılamış olmamıza rağmen yargılamalar devam etmekte ve ağır sonuçlar doğurmaktadır.\n\nTALEBİMİZ:\n• Zarar tamamen ödendiğinde dosyanın kapanması\n• Kamu davasının düşmesi\n• Mevcut arşiv kayıtlarının silinmesi, IBAN mağduriyeti nedeniyle memuriyete engel oluşturulmaması\n\nBizler cezasızlık değil; zarar giderildiğinde hayatımıza devam edebilmek için adil ve ölçülü bir çözüm talep ediyoruz.\n\nGereğini saygıyla arz ederiz.\n\nİBAN Mağdurları\n(Ad-Soyad: )",
+            mailler: ["mesut.bozatli@tbmm.gov.tr","cavusoglu@tbmm.gov.tr","mevlut.kurt@tbmm.gov.tr","muammer.avci@tbmm.gov.tr","muhammed.adak@tbmm.gov.tr","turan.bedirhanoglu@tbmm.gov.tr","ummugulsen.ozturk@tbmm.gov.tr","unal.karaman@tbmm.gov.tr","vahit.kirisci@tbmm.gov.tr","vedat.bilgin@tbmm.gov.tr","vehbi.koc@tbmm.gov.tr","veysal.tipioglu@tbmm.gov.tr","yahya.celik@tbmm.gov.tr","yakup.otgoz@tbmm.gov.tr","yasar.kirkpinar@tbmm.gov.tr","yildirimtugrul.turkes@tbmm.gov.tr","yildiz.konalsuslu@tbmm.gov.tr","yilmaz.buyukaydin@tbmm.gov.tr","yusuf.ahlatci@tbmm.gov.tr","yusuf.beyazit@tbmm.gov.tr","suna.kepoluataman@tbmm.gov.tr","tuba.vuralcokal@tbmm.gov.tr","tugba.isikercan@tbmm.gov.tr","mehmetemin.oz@tbmm.gov.tr","mehmetemin.simsek@tbmm.gov.tr","mehmeteyup.ozkececi@tbmm.gov.tr","mehmetfaruk.pinarbasi@tbmm.gov.tr","m.galip.ensarioglu@tbmm.gov.tr","mkasapoglu@tbmm.gov.tr","mehmet.mus@tbmm.gov.tr","mehmetsait.yaz@tbmm.gov.tr","mehmetselim.ensarioglu@tbmm.gov.tr","mehmet.sahin@tbmm.gov.tr","halis.dalkilic@tbmm.gov.tr","halit.yerebakan@tbmm.gov.tr","haluk.ipek@tbmm.gov.tr","harun.mertoglu@tbmm.gov.tr","hasan.arslan@tbmm.gov.tr","hasan.cilez@tbmm.gov.tr","hasan.ekici@tbmm.gov.tr","hasan.turan@tbmm.gov.tr","havvasibel.soylemez@tbmm.gov.tr","hikmet.basak@tbmm.gov.tr","hulusi.akar@tbmm.gov.tr","hulusi.senturk@tbmm.gov.tr","huseyin.altinsoy@tbmm.gov.tr","huseyin.ozhan@tbmm.gov.tr","huseyin.yayman@tbmm.gov.tr","ibrahimethem.tas@tbmm.gov.tr","ibrahim.eyyupoglu@tbmm.gov.tr","ibrahimufuk.kaynak@tbmm.gov.tr","ibrahim.yurdunuseven@tbmm.gov.tr","idrisnebi.hatipoglu@tbmm.gov.tr","ihsan.koca@tbmm.gov.tr","inancsirackara.olmeztoprak@tbmm.gov.tr","irfan.celikaslan@tbmm.gov.tr","ishak.san@tbmm.gov.tr","ismailcaglar.bayirci@tbmm.gov.tr","ismail.karayel@tbmm.gov.tr","ismail.erdem@tbmm.gov.tr","ismail.gunes@tbmm.gov.tr","ismail.ok@tbmm.gov.tr","julide.sarieroglu@tbmm.gov.tr","kaan.koc@tbmm.gov.tr","kadem.mete@tbmm.gov.tr","kayhan.turkmenoglu@tbmm.gov.tr","kemal.celik@tbmm.gov.tr","kemal.karahan@tbmm.gov.tr","zeki.korkutata@tbmm.gov.tr","ziya.altunyaldiz@tbmm.gov.tr","yusufziya.aldatmaz@tbmm.gov.tr","yusufziya.yilmaz@tbmm.gov.tr","yucelarzen.haciogullari@tbmm.gov.tr","zehranur.aydemir@tbmm.gov.tr","zeynep.yildiz@tbmm.gov.tr","yuksel.coskunyurek@tbmm.gov.tr","zafer.sirakaya@tbmm.gov.tr","mehmetugur.gokgoz@tbmm.gov.tr","meliha.akyol@tbmm.gov.tr","mervan.gul@tbmm.gov.tr","meryem.goka@tbmm.gov.tr","mestan.ozcan@tbmm.gov.tr","suat.pamukcu@tbmm.gov.tr","sunay.karamik@tbmm.gov.tr","suleyman.karaman24@tbmm.gov.tr","suleyman.ozgun@tbmm.gov.tr","suleyman.soylu@tbmm.gov.tr","suleyman.sahan@tbmm.gov.tr","saban.copuroglu@tbmm.gov.tr","sahin.tin@tbmm.gov.tr","samil.ayrim@tbmm.gov.tr","sebnem.bursali@tbmm.gov.tr","sengul.karsli@tbmm.gov.tr","tahir.akyurek@tbmm.gov.tr","tamer.akkal@tbmm.gov.tr","tuba.koksal@tbmm.gov.tr","kurtcan.celebi@tbmm.gov.tr","kursad.zorlu@tbmm.gov.tr","latif.selvi@tbmm.gov.tr","leyla.sahinusta@tbmm.gov.tr","lutfi.bayraktar@tbmm.gov.tr","lutfiyeselva.cam@tbmm.gov.tr","mahmutatillakaya@tbmm.gov.tr","mahmut.ozer@tbmm.gov.tr","mahmutridvan.nazirli@tbmm.gov.tr","mehmetali.cevheri@tbmm.gov.tr","mehmetali.celebi@tbmm.gov.tr","mehmet.baykan@tbmm.gov.tr","mehmet.demir2@tbmm.gov.tr","ali.ozkaya@tbmm.gov.tr","ali.sahin@tbmm.gov.tr","alitaylan.oztaylan@tbmm.gov.tr","ali.temur@tbmm.gov.tr","arslan.tatar@tbmm.gov.tr","asuman.erdogan@tbmm.gov.tr","atay.uslu@tbmm.gov.tr","ayhangider@tbmm.gov.tr","ayhan.salman@tbmm.gov.tr","ayse.bohurler@tbmm.gov.tr","ayse.kesir@tbmm.gov.tr","aysen.gurcan@tbmm.gov.tr","azmi.ekinci@tbmm.gov.tr","bahadir.yenisehirlioglu@tbmm.gov.tr","bayram.senocak@tbmm.gov.tr","behiye.eker@tbmm.gov.tr","bekir.bozdag@tbmm.gov.tr","belgin.uygur@tbmm.gov.tr","burhan.kayaturk@tbmm.gov.tr","bulent.tufenkci@tbmm.gov.tr","bunyamin.bozgeyik@tbmm.gov.tr","busra.paker@tbmm.gov.tr","cahit.ozkan@tbmm.gov.tr","canturk.alagoz@tbmm.gov.tr","gokhan.diktas@tbmm.gov.tr","hakan.aksu@tbmm.gov.tr","halil.eldemir@tbmm.gov.tr","halil.uluay@tbmm.gov.tr","tck158calisma@gmail.com","adamset34@hotmail.com"]
+        },
+        2: { konu: "Grup 2 Konusu", mesaj: "Grup 2 Mesajı", mailler: [] },
+        3: { konu: "Grup 3 Konusu", mesaj: "Grup 3 Mesajı", mailler: [] },
+        4: { konu: "Grup 4 Konusu", mesaj: "Grup 4 Mesajı", mailler: [] }
+    };
+
+    function mailGonder(id) {
+        const grup = veriler[id];
+        if (grup.mailler.length === 0) {
+            alert("Bu grup henüz doldurulmamış!");
+            return;
+        }
+        const bccList = grup.mailler.join(",");
+        const link = `mailto:?bcc=${bccList}&subject=${encodeURIComponent(grup.konu)}&body=${encodeURIComponent(grup.mesaj)}`;
+        window.location.href = link;
+    }
+</script>
+
+</body>
+</html>
