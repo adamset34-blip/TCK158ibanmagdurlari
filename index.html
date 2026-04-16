@@ -20,10 +20,19 @@
 <body>
 
 <div class="container">
-    <div style="margin-bottom: 20px;">
-    <img src="IMG-20260416-WA0008.jpg" alt="Logo" style="max-width: 180px; height: auto; border-radius: 50%; border: 3px solid #28779b; padding: 5px;">
+   <div style="text-align: center; margin-bottom: 20px;">
+    <img src="IMG-20260416-WA0008.jpg" alt="Logo" style="max-width: 150px; border-radius: 50%; border: 3px solid #28779b; padding: 5px; margin-bottom: 15px;">
+    
+    <div style="background: #f0f7fa; padding: 15px; border-radius: 12px; border: 1px solid #28779b;">
+        <div style="font-size: 12px; color: #28779b; font-weight: bold; text-transform: uppercase;">Türkiye Geneli Toplam Gönderim</div>
+        <div id="sayac" style="font-size: 32px; font-weight: bold; color: #202124; margin: 5px 0;">Yükleniyor...</div>
+        <div style="font-size: 10px; color: #666;">Veriler anlık güncellenmektedir</div>
+    </div>
 </div>
-    <h2>İban Mağdurları İletişim Paneli</h2>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <h2>TCK 158 İBAN MAĞDURLARI</h2>
     <span class="subtitle">İlgili grubu seçerek mail gönderimini başlatın.</span>
 
     <div class="group-card">
@@ -52,6 +61,31 @@
 </div>
 
 <script>
+    // Firebase Yapılandırması (Senin bilgilerini yerleştirdim)
+    const firebaseConfig = {
+        apiKey: "AIzaSyA8jkLgpQqE5vFhSFqVI0gimyzoYNMYPyU",
+        authDomain: "tck158ibanmagdurlari.firebaseapp.com",
+        databaseURL: "https://tck158ibanmagdurlari-default-rtdb.firebaseio.com",
+        projectId: "tck158ibanmagdurlari",
+        storageBucket: "tck158ibanmagdurlari.firebasestorage.app",
+        messagingSenderId: "739202188968",
+        appId: "1:739202188968:web:116161bc0233ab2178649d"
+    };
+
+    // Firebase'i Başlat
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const database = firebase.database();
+    const sayacRef = database.ref('toplam_gonderim');
+
+    // Sayacı Canlı Dinle
+    sayacRef.on('value', (snapshot) => {
+        const veri = snapshot.val() || 0;
+        document.getElementById('sayac').innerText = veri.toLocaleString('tr-TR');
+    });
+
+    // Veri Listesi (4. Grup Temizlendi)
     const veriler = {
         1: {
             konu: "TCK 158 Maddesinde İşlemlere Yönelik Hukuki İnceleme Talebi",
@@ -60,46 +94,48 @@
         },
         2: {
             konu: "TCK 158 Maddesinde İşlemlere Yönelik Hukuki İnceleme Talebi",
-            mesaj: "Sayın Adalet ve Kalkınma Partisi Yetkilileri,\n\nBizler, TCK 158 başta olmak üzere IBAN kaynaklı yargılanan; ancak dolandırıcılık kastı olmayan, hesapları başkaları tarafından kullanılan kişileriz. Dosyadaki Müşteki zararlarını tamamen karşılamış olmamıza rağmen yargılamalar devam etmekte ve ağır sonuçlar doğurmaktadır.\n\nTALEBİMİZ:\n• Zarar tamamen ödendiğinde dosyanın kapanması\n• Kamu davasının düşmesi\n• Mevcut arşiv kayıtlarının silinmesi, IBAN mağduriyeti nedeniyle memuriyete engel oluşturulmaması\n\nBizler cezasızlık değil; zarar giderildiğinde hayatımıza devam edebilmek için adil ve ölçülü bir çözüm talep ediyoruz.\n\nGereğini saygıyla arz ederiz.\n\nİBAN Mağdurları\n",
+            mesaj: "Sayın Adalet ve Kalkınma Partisi Yetkilileri...\n",
             mailler: ["muhammed.avci@tbmm.gov.tr","muhammetmufit.aydin@tbmm.gov.tr","murat.alparslan@tbmm.gov.tr","murat.baybatur@tbmm.gov.tr","muratcahid.cingi@tbmm.gov.tr","murat.kaya54@tbmm.gov.tr","mustafa.alkayis@tbmm.gov.tr","mustafa.arslan@tbmm.gov.tr","mustafa.canbey@tbmm.gov.tr","mustafa.demir2@tbmm.gov.tr","mustafahakan.ozer@tbmm.gov.tr","mustafa.hamarat@tbmm.gov.tr","mustafahulki.cevizoglu@tbmm.gov.tr","mustafa.kaplan@tbmm.gov.tr","mustafa.kose@tbmm.gov.tr","mustafanedim.yamali@tbmm.gov.tr","mustafa.oguz@tbmm.gov.tr","mustafasavas@tbmm.gov.tr","mustafa.sen61@tbmm.gov.tr","mustafa.varank@tbmm.gov.tr","mustafa.yavuz@tbmm.gov.tr","tubadurgut@tbmm.gov.tr","nazim.elmas@tbmm.gov.tr","nazim.mavis@tbmm.gov.tr","necmettin.erkan@tbmm.gov.tr","nilgun.ok@tbmm.gov.tr","nilhan.ayan@tbmm.gov.tr","numankurtulmus@tbmm.gov.tr","nnebati@tbmm.gov.tr","nurettin.alan@tbmm.gov.tr","oguz.ucuncu@tbmm.gov.tr","oguzhan.kaya@tbmm.gov.tr","orhan.ates@tbmm.gov.tr","orhan.erdem@tbmm.gov.tr","orhan.kircali@tbmm.gov.tr","orhan.yegin@tbmm.gov.tr","osman.gokcek@tbmm.gov.tr","osman.mesten@tbmm.gov.tr","osman.saglam@tbmm.gov.tr","osman.zabun@tbmm.gov.tr","omer.celik@tbmm.gov.tr","omer.ileri@tbmm.gov.tr","omerorucbilal.debgici@tbmm.gov.tr","omer.ozmen@tbmm.gov.tr","ozlem.zengin@tbmm.gov.tr","rabia.ilhan@tbmm.gov.tr","radiyesezer.katircioglu@tbmm.gov.tr","refik.ozen@tbmm.gov.tr","resul.kurt@tbmm.gov.tr","ruken.kilerci@tbmm.gov.tr","rukiye.toy@tbmm.gov.tr","rumeysa.kadak@tbmm.gov.tr","sadettin.hulagu@tbmm.gov.tr","saffet.bozkurt@tbmm.gov.tr","sami.cakir@tbmm.gov.tr","sayinbayar.ozsoy@tbmm.gov.tr","seda.goren@tbmm.gov.tr","seda.saribas@tbmm.gov.tr","selami.altinok@tbmm.gov.tr","selmanoguzhan.eser@tbmm.gov.tr","selman.ozboyaci@tbmm.gov.tr","senanur.celik@tbmm.gov.tr","serap.yaziciozbudun@tbmm.gov.tr","serkan.bayram@tbmm.gov.tr","sevan.sivacioglu@tbmm.gov.tr","seydi.gulsoy@tbmm.gov.tr","seyithan.izsiz@tbmm.gov.tr","abdulhamit.gul@tbmm.gov.tr","abdulkadir.akgul@tbmm.gov.tr","emin.onen@tbmm.gov.tr","abdulkadir.ozel@tbmm.gov.tr","abdullah.agrali@tbmm.gov.tr","abdullah.dogru@tbmm.gov.tr","abdullah.guler@tbmm.gov.tr","abdurrahim.firat@tbmm.gov.tr","abdurrahman.babacan@tbmm.gov.tr","abdurrahim.dusak@tbmm.gov.tr","adem.calkin@tbmm.gov.tr","adem.korkmaz@tbmm.gov.tr","adem.yesildal@tbmm.gov.tr","adem.yildirim2@tbmm.gov.tr","adil.bicer@tbmm.gov.tr","adil.karaismailoglu@tbmm.gov.tr","ahmet.buyukgumus@tbmm.gov.tr","ahmet.colakoglu@tbmm.gov.tr","ahmetersagun.yucel@tbmm.gov.tr","ahmetfethan.baykoc@tbmm.gov.tr","ahmetgokhan.saricam@tbmm.gov.tr","ahmet.kilic@tbmm.gov.tr","ahmetmucahit.arinc@tbmm.gov.tr","ahmetsalih.dal@tbmm.gov.tr","ali.inci@tbmm.gov.tr","ali.kiratli@tbmm.gov.tr","celalettin.kose@tbmm.gov.tr","cem.sahin2@tbmm.gov.tr","cemil.yaman@tbmm.gov.tr","cengiz.aydogdu@tbmm.gov.tr","cevahirasuman.yazmaci@tbmm.gov.tr","cevahir.uzkurt@tbmm.gov.tr","ceydabolunmezcankiri@tbmm.gov.tr","cuneyt.aldemir@tbmm.gov.tr","cuneyt.yuksel@tbmm.gov.tr","cigdem.erdogan@tbmm.gov.tr","cigdem.karaaslan@tbmm.gov.tr","cigdem.koncagul@tbmm.gov.tr","derya.ayaydin@tbmm.gov.tr","derya.bakbak@tbmm.gov.tr","derya.yanik@tbmm.gov.tr","durmusali.keskinkilic@tbmm.gov.tr","dursun.atas@tbmm.gov.tr","efkan.ala@tbmm.gov.tr","ejder.acikkapi@tbmm.gov.tr","emel.gozukaradurmaz@tbmm.gov.tr","emine.yavuzgozgec@tbmm.gov.tr","emre.caliskan@tbmm.gov.tr","ercan.ozturk@tbmm.gov.tr","erkan.kandemir@tbmm.gov.tr","erol.keles@tbmm.gov.tr","ersan.aksu@tbmm.gov.tr","ertugrul.kocacik@tbmm.gov.tr","eyyupkadir.inan@tbmm.gov.tr","fahrettin.tugrul@tbmm.gov.tr","faruk.aytek@tbmm.gov.tr","faruk.celik@tbmm.gov.tr","faruk.kilic@tbmm.gov.tr","fatih.donmez@tbmm.gov.tr","fatma.aksal@tbmm.gov.tr","fatma.oncu@tbmm.gov.tr","fatmaserap.ekmekci@tbmm.gov.tr","alpayozalan@tbmm.gov.tr","ferhat.nasiroglu@tbmm.gov.tr","feyzi.berdibek@tbmm.gov.tr","fuat.oktay@tbmm.gov.tr"]
         },
         3: {
             konu: "TCK 158 Maddesinde İşlemlere Yönelik Hukuki İnceleme Talebi",
-            mesaj: "Sayın Cumhuriyet Halk Partisi Yetkilileri,\n\nBizler, TCK 158 başta olmak üzere IBAN kaynaklı yargılanan; ancak dolandırıcılık kastı olmayan, hesapları başkaları tarafından kullanılan kişileriz. Dosyadaki Müşteki zararlarını tamamen karşılamış olmamıza rağmen yargılamalar devam etmekte ve ağır sonuçlar doğurmaktadır.\n\nTALEBİMİZ:\n• Zarar tamamen ödendiğinde dosyanın kapanması\n• Kamu davasının düşmesi\n• Mevcut arşiv kayıtlarının silinmesi, IBAN mağduriyeti nedeniyle memuriyete engel oluşturulmaması\n\nBizler cezasızlık değil; zarar giderildiğinde hayatımıza devam edebilmek için adil ve ölçülü bir çözüm talep ediyoruz.\n\nGereğini saygıyla arz ederiz.\n\nİBAN Mağdurları\n",
+            mesaj: "Sayın Cumhuriyet Halk Partisi Yetkilileri...\n",
             mailler: ["kadim.durmaz@tbmm.gov.tr","kadrienis.berberoglu@tbmm.gov.tr","kayihan.pala@tbmm.gov.tr","mahir.polat@tbmm.gov.tr","mahmut.tanal@tbmm.gov.tr","mehmet.guzelmansur@tbmm.gov.tr","msalihuzun@tbmm.gov.tr","mehmet.tahtasiz@tbmm.gov.tr","melih.meric@tbmm.gov.tr","metin.ilhan@tbmm.gov.tr","murat.bakan@tbmm.gov.tr","murat.can@tbmm.gov.tr","murat.emir@tbmm.gov.tr","mustafa.adiguzel@tbmm.gov.tr","mustafa.erdem3@tbmm.gov.tr","mustafa.sarigul@tbmm.gov.tr","adnan.beker@tbmm.gov.tr","ahmetbaran.yazgan@tbmm.gov.tr","atuncayozkan@tbmm.gov.tr","vehbi.bakirlioglu@tbmm.gov.tr","alifazil.kasap@tbmm.gov.tr","ali.gokcek@tbmm.gov.tr","ali.karaoba@tbmm.gov.tr","alimahir.basarir@tbmm.gov.tr","ali.oztunc@tbmm.gov.tr","aliye.cosar@tbmm.gov.tr","aliye.timisiersever@tbmm.gov.tr","asu.kaya@tbmm.gov.tr","askin.genc@tbmm.gov.tr","ayca.taskent@tbmm.gov.tr","ayhan.barut@tbmm.gov.tr","aykut.kaya2@tbmm.gov.tr","aylin.yaman@tbmm.gov.tr","aysu.bankoglu@tbmm.gov.tr","s.yanikomeroglu@tbmm.gov.tr","baris.bektas@tbmm.gov.tr","baris.karadeniz@tbmm.gov.tr","bekir.basevirgen@tbmm.gov.tr","bilal.bilici@tbmm.gov.tr","burhanettin.bulut@tbmm.gov.tr","bulent.tezcan@tbmm.gov.tr","cavit.ari@tbmm.gov.tr","cem.avsar@tbmm.gov.tr","cemal.enginyurt@tbmm.gov.tr","cevdet.akay@tbmm.gov.tr","cumhur.uzun@tbmm.gov.tr","deniz.demir@tbmm.gov.tr","deniz.yavuzyilmaz@tbmm.gov.tr","deniz.yucel@tbmm.gov.tr","dogan.demir@tbmm.gov.tr","ednan.arslan@tbmm.gov.tr","elvan.isikgezmis@tbmm.gov.tr","engin.altay@tbmm.gov.tr","ensar.aytekin@tbmm.gov.tr","erdogan.toprak@tbmm.gov.tr","evrim.karakoz@tbmm.gov.tr","evrim.rizvanoglu@tbmm.gov.tr","eylemertug.ertugrul@tbmm.gov.tr","fahri.ozkan@tbmm.gov.tr","faik.oztrak@tbmm.gov.tr","fethi.acikel@tbmm.gov.tr","gamze.akkusilgezdi@tbmm.gov.tr","gamze.tascier@tbmm.gov.tr","gizem.ozcan@tbmm.gov.tr","gokan.zeybek@tbmm.gov.tr","gokce.gokcen@tbmm.gov.tr","gokhan.gunaydin@tbmm.gov.tr","gulcan.kis@tbmm.gov.tr","gulizar.bicerkaraca@tbmm.gov.tr","gursel.erol@tbmm.gov.tr","harunozguryildizli@tbmm.gov.tr","hasan.ozturk@tbmm.gov.tr","hasan.ozturkmen@tbmm.gov.tr","hikmetyalim.halici@tbmm.gov.tr","huseyin.yildiz2@tbmm.gov.tr","ibrahim.arslan2@tbmm.gov.tr","ilhamiozcan.aygun@tbmm.gov.tr","ilhankesici@tbmm.gov.tr","inanakgun.alp@tbmm.gov.tr","ismailatakan.unver@tbmm.gov.tr","ismet.guneshan@tbmm.gov.tr","izzet.akbulut@tbmm.gov.tr","jalenur.sullu@tbmm.gov.tr","sezgin.tanrikulu@tbmm.gov.tr","muhip.kanko@tbmm.gov.tr","muzeyyen.sevkin@tbmm.gov.tr","nail.ciler@tbmm.gov.tr","namik.tan@tbmm.gov.tr","nermin.yildirimkara@tbmm.gov.tr","nimet.ozdemir@tbmm.gov.tr","nurhayat.altacakayisoglu@tbmm.gov.tr","nurten.yontar@tbmm.gov.tr","oguzkaan.salici@tbmm.gov.tr","okan.konuralp@tbmm.gov.tr","orhan.saribal@tbmm.gov.tr","orhan.sumer@tbmm.gov.tr","omerfethi.gurer@tbmm.gov.tr","ozgur.ceylan@tbmm.gov.tr","ozgurerdem.incesu@tbmm.gov.tr","ozgur.karabat@tbmm.gov.tr","ozgur.ozel@tbmm.gov.tr","rahmiaskin.tureli@tbmm.gov.tr","resat.karagoz@tbmm.gov.tr","rifatturuntay.nalbantoglu@tbmm.gov.tr","seda.kayaosen@tbmm.gov.tr","selmaaliye.kavaf@tbmm.gov.tr","semra.dincer@tbmm.gov.tr","serkan.sari@tbmm.gov.tr","servet.mullaoglu@tbmm.gov.tr","sevda.erdankilic@tbmm.gov.tr","seyit.torun@tbmm.gov.tr","sibel.suicmez@tbmm.gov.tr","suat.ozcagdas@tbmm.gov.tr","sururi.corabatir@tbmm.gov.tr","suleyman.bulbul@tbmm.gov.tr","sureyya.onesderici@tbmm.gov.tr","seref.arpaci@tbmm.gov.tr","tahsin.becan@tbmm.gov.tr","tahsin.ocakli@tbmm.gov.tr","talat.dincer@tbmm.gov.tr","talih.ozcan@tbmm.gov.tr","tekin.bingol@tbmm.gov.tr","turantaskin.ozer@tbmm.gov.tr","turkan.elci@tbmm.gov.tr","turker.ates@tbmm.gov.tr","ugur.bayraktutan@tbmm.gov.tr","ulas.karasu@tbmm.gov.tr","umut.akdogan@tbmm.gov.tr","utku.cakirozer@tbmm.gov.tr","umit.dikbayir@tbmm.gov.tr","umit.ozlale@tbmm.gov.tr","vecdi.gundogdu@tbmm.gov.tr","veli.agbaba@tbmm.gov.tr","yasar.tuzun@tbmm.gov.tr","y.emre@tbmm.gov.tr","yukselmansur.kilinc@tbmm.gov.tr","yuksel.taskin@tbmm.gov.tr","zeynel.emre@tbmm.gov.tr"]
         },
         4: {
             konu: "TCK 158 Maddesinde İşlemlere Yönelik Hukuki İnceleme Talebi",
-            mesaj: "Sayın Yetkilileri,\n\nBizler, TCK 158 başta olmak üzere IBAN kaynaklı yargılanan; ancak dolandırıcılık kastı olmayan, hesapları başkaları tarafından kullanılan kişileriz. Dosyadaki Müşteki zararlarını tamamen karşılamış olmamıza rağmen yargılamalar devam etmekte ve ağır sonuçlar doğurmaktadır.\n\nTALEBİMİZ:\n• Zarar tamamen ödendiğinde dosyanın kapanması\n• Kamu davasının düşmesi\n• Mevcut arşiv kayıtlarının silinmesi, IBAN mağduriyeti nedeniyle memuriyete engel oluşturulmaması\n\nBizler cezasızlık değil; zarar giderildiğinde hayatımıza devam edebilmek için adil ve ölçülü bir çözüm talep ediyoruz.\n\nGereğini saygıyla arz ederiz.\n\nİBAN Mağdurları\n",
-            mailler: ["erkan.bas@tbmm.gov.tr","sera.kadigil@tbmm.gov.tr","ahmet.sik@tbmm.gov.tr","can.atalay@tbmm.gov.tr","erhan.usta@tbmm.gov.tr","lutfu.turkkan@tbmm.gov.tr","kursad.zorlu@tbmm.gov.tr","turhan.corekci@tbmm.gov.tr","ersin.beyaz@tbmm.gov.tr","burak.akburak@tbmm.gov.tr","devlet.bahceli@tbmm.gov.tr","erkan.akcay@tbmm.gov.tr","feti.yildiz@tbmm.gov.tr","sadir.durmaz@tbmm.gov.tr","ismail.ozdemir@tbmm.gov.tr","levent.bulut@tbmm.gov.tr","semih.yalcin@tbmm.gov.tr","sezai.temelli@tbmm.gov.tr","pervin.buldan@tbmm.gov.tr","mithat.sancar@tbmm.gov.tr","sirri.sakik@tbmm.gov.tr","gulistan.kilic.kocyigit@tbmm.gov.tr","meral.danis.bestas@tbmm.gov.tr","tulay.hatimogullari@tbmm.gov.tr","cengiz.candar@tbmm.gov.tr","ferit.senyasar@tbmm.gov.tr","faruk.dinc@tbmm.gov.tr","serkan.ramanli@tbmm.gov.tr","sevdakaraca@tbmm.gov.tr","ibrahim.akin@tbmm.gov.tr","koray.aydin@tbmm.gov.tr","salim.ensarioglu@tbmm.gov.tr"]
+            mesaj: "Sayın Yetkilileri...\n",
+            mailler: [] // 4. Grup Boşaltıldı
         }
     };
 
     function mailGonder(id) {
+        if (veriler[id].mailler.length === 0) {
+            alert("Bu grup için e-posta adresi tanımlanmamıştır.");
+            return;
+        }
+
+        // Sayaç Artırma (Veritabanı)
+        sayacRef.transaction((currentValue) => {
+            return (currentValue || 0) + 1;
+        });
+
         const grup = veriler[id];
         const bccList = grup.mailler.join(",");
         const subject = encodeURIComponent(grup.konu);
         const body = encodeURIComponent(grup.mesaj);
 
-        // Doğrudan Gmail uygulamasını açan özel adres
         const gmailURL = `googlegmail:///co?bcc=${bccList}&subject=${subject}&body=${body}`;
-
-        // iPhone kontrolü
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
         if (isIOS) {
-            // iPhone'da sadece Gmail'i zorla
             window.location.href = gmailURL;
-            
-            // Eğer kullanıcıda Gmail yoksa ve hiçbir şey açılmazsa diye 
-            // çok kısa bir uyarı verebiliriz
-            setTimeout(function() {
+            setTimeout(() => {
                 if (confirm("Gmail uygulaması açılamadı. Gmail yüklü mü?")) {
                     window.location.href = "https://apps.apple.com/tr/app/gmail-e-posta-google-dan/id422689480";
                 }
             }, 2500);
         } else {
-            // Android ve PC'de standart yöntem (zaten sorunsuz çalışıyor)
             window.location.href = `mailto:?bcc=${bccList}&subject=${subject}&body=${body}`;
         }
     }
