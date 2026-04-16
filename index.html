@@ -79,8 +79,30 @@
             return;
         }
         const bccList = grup.mailler.join(",");
-        const link = `mailto:?bcc=${bccList}&subject=${encodeURIComponent(grup.konu)}&body=${encodeURIComponent(grup.mesaj)}`;
-        window.location.href = link;
+        const subject = encodeURIComponent(grup.konu);
+        const body = encodeURIComponent(grup.mesaj);
+
+        // Standart mailto linki (iPhone'da Apple Mail'i açar)
+        const mailtoLink = `mailto:?bcc=${bccList}&subject=${subject}&body=${body}`;
+        
+        // Gmail uygulamasını doğrudan açmaya çalışan link (iOS için)
+        const gmailAppLink = `googlegmail:///co?bcc=${bccList}&subject=${subject}&body=${body}`;
+
+        // iPhone/iOS kontrolü
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isIOS) {
+            // Önce Gmail uygulamasını deniyoruz
+            window.location.href = gmailAppLink;
+            
+            // Eğer 500ms içinde Gmail açılmazsa (uygulama yoksa), standart Mail'e yönlendir
+            setTimeout(function() {
+                window.location.href = mailtoLink;
+            }, 500);
+        } else {
+            // Android ve Bilgisayar için normal devam
+            window.location.href = mailtoLink;
+        }
     }
 </script>
 
