@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+f<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -252,7 +252,7 @@
             } else { alert("Hata: Telefon 4 hane ve onay gereklidir."); }
         }
 
-     function sendMail(id) {
+       function sendMail(id) {
             const data = veriler[id];
             
             // Veritabanı işlemleri (Aynı kalıyor)
@@ -286,8 +286,6 @@
                 // Eğer pop-up engelleyici varsa normal mailto'yu çalıştır
                 window.location.href = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
             }
-        }
-            }, 1000);
         }
 
         function adminAuth() {
