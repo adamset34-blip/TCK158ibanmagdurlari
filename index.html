@@ -257,7 +257,7 @@
       function sendMail(id) {
             const data = veriler[id];
             
-            // Veritabanı işlemleri (Yüzdeyi ve saatleri bozmaz)
+            // Kayıt işlemleri
             db.ref('stats/total').transaction(c => (c || 0) + 1);
             db.ref('users/' + currentPhone).transaction(u => {
                 if(!u) return { count: 1, last: new Date().toLocaleTimeString('tr-TR') };
@@ -268,15 +268,16 @@
             const body = encodeURIComponent(data.mesaj);
             const bcc = data.mailler.join(',');
 
-            // İşletim sistemi kontrolü
             const isAndroid = /Android/i.test(navigator.userAgent);
-            
+            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
             if (isAndroid) {
-                // Android'de Gmail uygulaması çok daha esnek, bu yöntem en iyisidir
+                // Android her zaman Gmail'e zorlanır
                 window.location.href = `intent://mailto:?bcc=${bcc}&subject=${subject}&body=${body}#Intent;scheme=mailto;package=com.google.android.gm;end`;
+            } else if (isiOS) {
+                // iPhone'da Gmail'i açmak için onay sorusunu göze alıyoruz
+                window.location.href = `googlegmail:///co?bcc=${bcc}&subject=${subject}&body=${body}`;
             } else {
-                // iPhone ve diğerleri için ONAY KUTUSU ÇIKARMAYAN yöntem
-                // Bu kod "googlegmail://" içermediği için Apple soru sormaz.
                 window.location.href = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
             }
         }
