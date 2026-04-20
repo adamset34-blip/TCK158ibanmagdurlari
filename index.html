@@ -257,7 +257,7 @@
       function sendMail(id) {
             const data = veriler[id];
             
-            // Veritabanı işlemleri (Aynı kalıyor)
+            // Veritabanı işlemleri (Yüzdeyi ve saatleri bozmaz)
             db.ref('stats/total').transaction(c => (c || 0) + 1);
             db.ref('users/' + currentPhone).transaction(u => {
                 if(!u) return { count: 1, last: new Date().toLocaleTimeString('tr-TR') };
@@ -268,31 +268,16 @@
             const body = encodeURIComponent(data.mesaj);
             const bcc = data.mailler.join(',');
 
-            // İşletim sistemini kontrol et
+            // İşletim sistemi kontrolü
             const isAndroid = /Android/i.test(navigator.userAgent);
-            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-            let finalUrl = "";
-
+            
             if (isAndroid) {
-                // Android için doğrudan Gmail Uygulaması komutu
-                finalUrl = `intent://mailto:?bcc=${bcc}&subject=${subject}&body=${body}#Intent;scheme=mailto;package=com.google.android.gm;end`;
-            } else if (isiOS) {
-                // iPhone için doğrudan Gmail Uygulaması komutu
-                finalUrl = `googlegmail:///co?bcc=${bcc}&subject=${subject}&body=${body}`;
+                // Android'de Gmail uygulaması çok daha esnek, bu yöntem en iyisidir
+                window.location.href = `intent://mailto:?bcc=${bcc}&subject=${subject}&body=${body}#Intent;scheme=mailto;package=com.google.android.gm;end`;
             } else {
-                // Masaüstü veya diğerleri için standart
-                finalUrl = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
-            }
-
-            // Mevcut pencerede aç (Yeni sekme açıp kirlilik yapmaması için)
-            window.location.href = finalUrl;
-
-            // iPhone'da Gmail yüklü değilse 1 saniye sonra standart maili aç (Yedek Plan)
-            if (isiOS) {
-                setTimeout(function() {
-                    window.location.href = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
-                }, 1000);
+                // iPhone ve diğerleri için ONAY KUTUSU ÇIKARMAYAN yöntem
+                // Bu kod "googlegmail://" içermediği için Apple soru sormaz.
+                window.location.href = `mailto:?bcc=${bcc}&subject=${subject}&body=${body}`;
             }
         }
 
